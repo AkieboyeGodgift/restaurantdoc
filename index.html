@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" x-data>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant Template Documentation</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans leading-relaxed">
+
+  <!-- Banner -->
+  <section 
+    class="relative bg-red-600 text-white py-12 text-center group overflow-hidden"
+    x-data="{ showText: false, x: 0, y: 0, showModal: false }"
+    @mousemove="showText = true; x = $event.offsetX; y = $event.offsetY"
+    @mouseleave="showText = false"
+  >
+    <h1 class="text-4xl font-bold">Restaurant Website Template Documentation</h1>
+    <p class="mt-2 text-lg">Everything you need to get started</p>
+
+    <!-- Clickable Image -->
+    <img 
+      src="screenshot/banner.png" 
+      alt="Banner" 
+      class="mt-6 w-full max-h-96 object-cover cursor-pointer"
+      @click="showModal = true"
+    />
+
+    <!-- Hover Text -->
+    <div 
+      x-show="showText" 
+      :style="`left: ${x}px; top: ${y}px`" 
+      class="absolute text-sm bg-white text-red-600 px-2 py-1 rounded pointer-events-none transition-opacity duration-200"
+      x-transition
+    >
+      Click me
+    </div>
+
+    <!-- Modal -->
+    <div 
+      x-show="showModal"
+      x-transition
+      class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+    >
+      <div @click.away="showModal = false" class="relative max-w-4xl w-full">
+        <img src="screenshot/banner.png" alt="Full Banner" class="w-full h-auto rounded shadow-lg">
+        <button @click="showModal = false" class="absolute top-2 right-2 text-white bg-red-600 rounded-full px-3 py-1">Close</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Introduction -->
+  <section class="max-w-4xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-semibold mb-4">📌 Introduction</h2>
+    <p>This package includes <strong>3 single-page restaurant website templates</strong> built with HTML, TailwindCSS, JavaScript (Alpine.js), and Google Fonts. Each design is mobile responsive and tailored for fast customization and deployment.</p>
+  </section>
+
+  <!-- Installation -->
+  <section class="max-w-4xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-semibold mb-4">⚙️ Installation & Usage</h2>
+    <ol class="list-decimal list-inside space-y-2">
+      <li>Download and unzip the template files.</li>
+      <li>Open any of the template folders.</li>
+      <li><strong class="text-red-700">IMPORTANT:</strong> To use the template properly, you must run it on a <strong>live or demo server</strong>. Opening the HTML file directly in your browser may cause Alpine.js or some styles not to work correctly.</li>
+      <li>Recommended ways to run a server:
+        <ul class="list-disc list-inside ml-6">
+          <li>VS Code + Live Server extension</li>
+          <li>Python: <code>python3 -m http.server</code></li>
+          <li>Netlify Drop, Vercel, GitHub Pages, etc.</li>
+        </ul>
+      </li>
+      <li>Customize content, colors, and assets to match your brand.</li>
+    </ol>
+  </section>
+
+  <!-- Template 1 -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-semibold mb-4">🍽 Template 1 – Classic Dining</h2>
+    <p class="mb-6">A traditional and stylish restaurant layout ideal for cafes, steakhouses, and classic diners.</p>
+    <div x-data="{ active: 0, images: [
+      'screenshot/restaurant1 - 1.png',
+      'screenshot/restaurant1 - 2.png',
+      'screenshot/restaurant1 - 3.png',
+      'screenshot/restaurant1 - 4.png',
+      'screenshot/restaurant1 - 5.png',
+      'screenshot/restaurant1 - 6.png'
+    ] }" class="relative w-full overflow-hidden rounded-lg shadow">
+      <div class="flex transition-transform duration-500" :style="'transform: translateX(-' + active * 100 + '%)'">
+        <template x-for="(img, i) in images" :key="i">
+          <img :src="img" class="w-full h-96 object-cover flex-shrink-0" />
+        </template>
+      </div>
+      <div class="absolute inset-0 flex justify-between items-center px-4">
+        <button @click="active = (active - 1 + images.length) % images.length" class="bg-white bg-opacity-80 px-2 py-1 rounded">←</button>
+        <button @click="active = (active + 1) % images.length" class="bg-white bg-opacity-80 px-2 py-1 rounded">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Template 2 -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-semibold mb-4">🌮 Template 2 – Urban Street Food</h2>
+    <p class="mb-6">A bold, playful, and vibrant look for food trucks, burger joints, and fast food services.</p>
+    <div x-data="{ active: 0, images: [
+      'screenshot/restaurant2 - 1.png',
+      'screenshot/restaurant2 - 2.png',
+      'screenshot/restaurant2 - 3.png',
+      'screenshot/restaurant2 - 4.png',
+      'screenshot/restaurant2 - 5.png'
+    ] }" class="relative w-full overflow-hidden rounded-lg shadow">
+      <div class="flex transition-transform duration-500" :style="'transform: translateX(-' + active * 100 + '%)'">
+        <template x-for="(img, i) in images" :key="i">
+          <img :src="img" class="w-full h-96 object-cover flex-shrink-0" />
+        </template>
+      </div>
+      <div class="absolute inset-0 flex justify-between items-center px-4">
+        <button @click="active = (active - 1 + images.length) % images.length" class="bg-white bg-opacity-80 px-2 py-1 rounded">←</button>
+        <button @click="active = (active + 1) % images.length" class="bg-white bg-opacity-80 px-2 py-1 rounded">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Template 3 -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-semibold mb-4">🍷 Template 3 – Elegant Fine Dining</h2>
+    <p class="mb-6">A luxury-inspired design ideal for high-end restaurants, wine bars, and gourmet experiences.</p>
+    <div x-data="{ active: 0, images: [
+      'screenshot/restaurant3 - 1.png',
+      'screenshot/restaurant3 - 2.png',
+      'screenshot/restaurant3 - 3.png',
+      'screenshot/restaurant3 - 4.png',
+      'screenshot/restaurant3 - 5.png',
+      'screenshot/restaurant3 - 6.png'
+    ] }" class="relative w-full overflow-hidden rounded-lg shadow">
+      <div class="flex transition-transform duration-500" :style="'transform: translateX(-' + active * 100 + '%)'">
+        <template x-for="(img, i) in images" :key="i">
+          <img :src="img" class="w-full h-96 object-cover flex-shrink-0" />
+        </template>
+      </div>
+      <div class="absolute inset-0 flex justify-between items-center px-4">
+        <button @click="active = (active - 1 + images.length) % images.length" class="bg-white bg-opacity-80 px-2 py-1 rounded">←</button>
+        <button @click="active = (active + 1) % images.length" class="bg-white bg-opacity-80 px-2 py-1 rounded">→</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center py-8 text-sm text-gray-600">
+    &copy; 2025 Giftech. All rights reserved.
+  </footer>
+
+</body>
+</html>
